@@ -107,8 +107,23 @@
   </div>
 
   <script>
-    function showResponse() {
-      alert("You've made me the happiest person alive! ❤️");
+    function sendResponse(response) {
+      // Send the response to the backend using fetch
+      fetch('send_email.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ answer: response })
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data); // Show the response message
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while sending the message.');
+      });
     }
   </script>
 </body>
