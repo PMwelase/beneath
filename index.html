@@ -67,10 +67,27 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin: 0 10px;
     }
 
     .form-container button:hover {
       background: #c2185b; /* Darker pink on hover */
+    }
+    
+    #responseMessage {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .success {
+      background-color: rgba(76, 175, 80, 0.7);
+    }
+    
+    .error {
+      background-color: rgba(244, 67, 54, 0.7);
     }
   </style>
 </head>
@@ -79,7 +96,7 @@
     <h1>A Day from Seeing Your Face</h1>
     <p>
       Dearest Milena,<br><br>
-      “I’m tired, can’t think of anything and want only to lay my face in your lap, feel your hand on my head and remain like that through all eternity.”
+      "I'm tired, can't think of anything and want only to lay my face in your lap, feel your hand on my head and remain like that through all eternity."
     </p>
     <div class="screenshots">
       <!-- <img src="1.jpg" alt="Our Conversation"> -->
@@ -101,13 +118,18 @@
     <!-- Form Section -->
     <div class="form-container">
       <h2>Will you let me see beneath your beautiful?</h2>
-      <button onclick="showResponse()">Yes</button>
-      <button onclick="showResponse()">Of Course</button>
+      <button onclick="sendResponse('Yes')">Yes</button>
+      <button onclick="sendResponse('Of Course')">Of Course</button>
+      <div id="responseMessage"></div>
     </div>
   </div>
 
   <script>
     function sendResponse(response) {
+      const messageElement = document.getElementById('responseMessage');
+      messageElement.style.display = 'block';
+      messageElement.innerHTML = "Sending your answer...";
+      
       // Send the response to the backend using fetch
       fetch('send_email.php', {
         method: 'POST',
@@ -116,13 +138,24 @@
         },
         body: JSON.stringify({ answer: response })
       })
-      .then(response => response.text())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
       .then(data => {
-        alert(data); // Show the response message
+        messageElement.innerHTML = data;
+        messageElement.className = 'success';
+        // Optional: Add a heart animation or redirect to another page
+        setTimeout(() => {
+          messageElement.innerHTML += "<br>❤️";
+        }, 1000);
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('An error occurred while sending the message.');
+        messageElement.innerHTML = 'An error occurred while sending your response. Please try again.';
+        messageElement.className = 'error';
       });
     }
   </script>
