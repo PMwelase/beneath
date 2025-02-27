@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      background: url('screenshot1.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent overlay */
+      border-radius: 10px;
+      margin: 50px auto;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .screenshots img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-container {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8); /* Dark background for the form */
+      border-radius: 10px;
+    }
+
+    .form-container h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .form-container button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      color: white;
+      background: #e91e63; /* Romantic pink color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background: #c2185b; /* Darker pink on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>A Day from Seeing Your Face</h1>
+    <p>
+      Dearest Milena,<br><br>
+      “I’m tired, can’t think of anything and want only to lay my face in your lap, feel your hand on my head and remain like that through all eternity.”
+    </p>
+    <div class="screenshots">
+      <!-- <img src="1.jpg" alt="Our Conversation"> -->
+      <img src="2.jpg" alt="Our Memories">
+      <img src="3.jpg" alt="Our Memories">
+      <img src="4.jpg" alt="Our Memories">
+      <img src="5.jpg" alt="Our Memories">
+      <img src="6.jpg" alt="Our Memories">
+      <img src="8.jpg" alt="Our Memories">
+      <img src="9.jpg" alt="Our Memories">
+      <img src="10.jpg" alt="Our Memories">
+      <img src="11.jpg" alt="Our Memories">
+      <img src="12.jpg" alt="Our Memories">
+    </div>
+
+    <!-- YouTube Video -->
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/bqIxCtEveG8" title="Labrinth - Beneath Your Beautiful (Official Video) ft. Emeli Sandé" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <!-- Form Section -->
+    <div class="form-container">
+      <h2>Will you let me see beneath your beautiful?</h2>
+      <button onclick="showResponse()">Yes</button>
+      <button onclick="showResponse()">Of Course</button>
+    </div>
+  </div>
+
+  <script>
+    function showResponse() {
+      alert("You've made me the happiest person alive! ❤️");
+    }
+  </script>
+</body>
+</html>
