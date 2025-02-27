@@ -11,8 +11,11 @@
       font-family: 'Arial', sans-serif;
       color: white;
       text-align: center;
-      background: url('screenshot1.jpg') no-repeat center center fixed;
+      background: black;
       background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
 
     .container {
@@ -21,6 +24,8 @@
       border-radius: 10px;
       margin: 50px auto;
       max-width: 600px;
+      position: relative;
+      z-index: 10;
     }
 
     h1 {
@@ -89,9 +94,32 @@
     .error {
       background-color: rgba(244, 67, 54, 0.7);
     }
+    
+    /* Floating elements style */
+    .floating-element {
+      position: fixed;
+      z-index: 1;
+      pointer-events: none;
+      animation: float 15s linear infinite;
+      color: #e91e63;
+      font-size: 24px;
+      opacity: 0.8;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Floating hearts container -->
+  <div id="floating-elements-container"></div>
+
   <div class="container">
     <h1>A Day from Seeing Your Face</h1>
     <p>
@@ -125,10 +153,53 @@
   </div>
 
   <script>
+    // Create floating hearts
+    function createFloatingElements(symbol = '❤️') {
+      const container = document.getElementById('floating-elements-container');
+      container.innerHTML = ''; // Clear existing elements
+      
+      // Create 20 floating hearts
+      for (let i = 0; i < 20; i++) {
+        const element = document.createElement('div');
+        element.className = 'floating-element';
+        element.textContent = symbol;
+        
+        // Random positioning
+        const size = Math.random() * 0.5 + 0.5; // Size variation between 0.5 and 1
+        element.style.fontSize = `${Math.floor(24 * size)}px`;
+        element.style.left = `${Math.random() * 100}vw`;
+        
+        // Random animation duration between 10 and 20 seconds
+        const duration = Math.random() * 10 + 10;
+        element.style.animationDuration = `${duration}s`;
+        
+        // Random starting position
+        const startPosition = Math.random() * 100;
+        element.style.top = `${startPosition}vh`;
+        
+        // Random rotation
+        const startRotation = Math.random() * 360;
+        element.style.transform = `rotate(${startRotation}deg)`;
+        
+        // Add to container
+        container.appendChild(element);
+      }
+    }
+
+    // Call the function on page load
+    window.onload = function() {
+      createFloatingElements('❤️');
+    };
+
     function sendResponse(response) {
       const messageElement = document.getElementById('responseMessage');
       messageElement.style.display = 'block';
       messageElement.innerHTML = "Sending your answer...";
+      
+      // Change hearts to smiles if user says "Yes"
+      if (response === 'Yes') {
+        createFloatingElements('😊');
+      }
       
       // Send the response to the backend using fetch
       fetch('send_email.php', {
@@ -154,7 +225,7 @@
       })
       .catch(error => {
         console.error('Error:', error);
-        messageElement.innerHTML = 'An error occurred while sending your response. Please try again.';
+        messageElement.innerHTML = 'Email doesnt work. Just tell me :)';
         messageElement.className = 'error';
       });
     }
